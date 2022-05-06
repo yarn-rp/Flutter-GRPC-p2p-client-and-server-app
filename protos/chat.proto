@@ -1,0 +1,28 @@
+syntax = "proto3";
+package chatPackage;
+
+service Chat {
+    rpc Stream(stream StreamRequest) returns (stream StreamResponse) {}
+}
+
+message ConnectionAddress {
+    string address = 1;
+    int32 port = 2;
+}
+
+message User {
+    string name = 1;
+    ConnectionAddress address =2;
+}
+
+message Message {
+    User user = 1;
+    string message = 2;
+}
+message StreamRequest {
+    Message message = 2;
+}
+message StreamResponse {
+    int32 timestamp = 1;
+    Message client_message = 2;
+}
